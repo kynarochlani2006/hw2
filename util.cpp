@@ -16,14 +16,30 @@ std::string convToLower(std::string src)
 std::set<std::string> parseStringToWords(string rawWords)
 {
 
+  std::set<std::string> keywordsSet;
+  std::string currWord;
+  
+  for(size_t i = 0; i < rawWords.length(); i++){
 
+    char currentLetter = rawWords[i];
+    if(currentLetter >= 'A' && currentLetter <= 'Z' || currentLetter >= 'a' && currentLetter <= 'z' || currentLetter >= '0' && currentLetter <= '9'){
+      if(currentLetter >= 'A' && currentLetter <= 'Z'){
+        currentLetter += 32;
+      }
+      currWord += currentLetter;
+    } else {
+      if(currWord.length() >= 2){
+        keywordsSet.insert(currWord);
+      }
+      currWord = "";
+    }
+  }
 
+  if(currWord.length() >= 2){
+    keywordsSet.insert(currWord);
+  }
 
-
-
-
-
-
+  return keywordsSet;
 
 }
 
